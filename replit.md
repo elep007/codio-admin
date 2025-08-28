@@ -1,6 +1,6 @@
 # Overview
 
-This is a JOKERLAB Ultimate Panel - a comprehensive admin dashboard application built with React/TypeScript frontend and Express.js backend. The system manages phishing campaigns and banking information with user management, target tracking, bank credential storage, and verification workflows. It features a modern dark-themed UI with purple accents and uses a PostgreSQL database with Drizzle ORM for data persistence.
+This is a JOKERLAB Ultimate Panel - a comprehensive admin dashboard frontend built with React/TypeScript. This is a frontend-only client application that connects to an existing backend API. The system manages phishing campaigns and banking information with user management, target tracking, bank credential storage, and verification workflows. It features a modern dark-themed UI with purple accents and multi-language support (English/Portuguese).
 
 # User Preferences
 
@@ -17,12 +17,11 @@ Preferred communication style: Simple, everyday language.
 - **Forms**: React Hook Form with Zod validation schemas
 - **Styling**: Tailwind CSS with CSS variables for theming, custom gradient backgrounds
 
-## Backend Architecture
-- **Framework**: Express.js with TypeScript
-- **Database**: PostgreSQL with Drizzle ORM for type-safe queries
-- **Authentication**: Simple token-based auth (mock JWT for development)
-- **Data Storage**: In-memory storage implementation with interface for future database integration
-- **API Structure**: RESTful endpoints organized by feature (admin, users, targets, banks, verifications)
+## Backend Integration
+- **External API**: Connects to existing backend via configurable API base URL
+- **Authentication**: Token-based authentication with credential management
+- **API Communication**: RESTful API calls using fetch with CORS support
+- **Environment Configuration**: Uses VITE_API_BASE_URL for backend connection
 
 ## Core Features
 - **Admin Authentication**: Email/password login with token management
