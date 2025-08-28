@@ -27,6 +27,7 @@ const resources = {
       "common.name": "Name",
       "common.phone": "Phone",
       "common.date": "Date",
+      "common.error": "Error",
 
       // Auth
       "auth.title": "JOKERLAB",
@@ -63,6 +64,7 @@ const resources = {
       "dashboard.activePage": "Active Page",
       "dashboard.copy": "Copy",
       "dashboard.totalBanks": "Total Banks:",
+      "dashboard.availableBanks": "Available Banks",
 
       // Users
       "users.title": "User Management",
@@ -78,6 +80,9 @@ const resources = {
       "users.deleteUser": "Delete User",
       "users.confirmDelete": "Are you sure you want to delete this user?",
       "users.noUsers": "No users found",
+      "users.userDeleted": "User deleted",
+      "users.userDeletedSuccess": "User deleted successfully",
+      "users.deleteError": "Could not delete user",
 
       // User Profile
       "userProfile.title": "User Profile",
@@ -158,6 +163,7 @@ const resources = {
       "common.name": "Nome",
       "common.phone": "Telefone",
       "common.date": "Data",
+      "common.error": "Erro",
 
       // Auth
       "auth.title": "JOKERLAB",
@@ -194,6 +200,7 @@ const resources = {
       "dashboard.activePage": "Página Ativa",
       "dashboard.copy": "Copiar",
       "dashboard.totalBanks": "Total de Bancos:",
+      "dashboard.availableBanks": "Bancos Disponíveis",
 
       // Users
       "users.title": "Gerenciamento de Usuários",
@@ -209,6 +216,9 @@ const resources = {
       "users.deleteUser": "Excluir Usuário",
       "users.confirmDelete": "Tem certeza que deseja excluir este usuário?",
       "users.noUsers": "Nenhum usuário encontrado",
+      "users.userDeleted": "Usuário excluído",
+      "users.userDeletedSuccess": "O usuário foi excluído com sucesso",
+      "users.deleteError": "Não foi possível excluir o usuário",
 
       // User Profile
       "userProfile.title": "Perfil do Usuário",

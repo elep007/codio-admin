@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +14,7 @@ import { DeleteConfirmModal } from "@/components/modals/delete-confirm-modal";
 import type { User } from "@shared/schema";
 
 export default function UsersPage() {
+  const { t } = useTranslation();
   const { data: usersData = [], isLoading } = useQuery({
     queryKey: ["/api/users"],
   });
@@ -29,16 +31,16 @@ export default function UsersPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/users"] });
       toast({
-        title: "Usuário excluído",
-        description: "O usuário foi excluído com sucesso",
+        title: t("users.userDeleted"),
+        description: t("users.userDeletedSuccess"),
       });
       setDeletingUser(null);
     },
     onError: () => {
       toast({
         variant: "destructive",
-        title: "Erro",
-        description: "Não foi possível excluir o usuário",
+        title: t("common.error"),
+        description: t("users.deleteError"),
       });
     },
   });
@@ -46,7 +48,7 @@ export default function UsersPage() {
   const columns = [
     {
       key: "createdAt",
-      header: "Data/Hora",
+      header: t("common.date"),
       render: (value: string) => {
         if (!value) return "-";
         return new Date(value).toLocaleString("pt-BR");
@@ -54,7 +56,7 @@ export default function UsersPage() {
     },
     {
       key: "photo",
-      header: "Foto",
+      header: t("users.photo"),
       render: (value: string) => (
         <Avatar className="w-8 h-8">
           <AvatarFallback className="bg-accent">
@@ -65,7 +67,7 @@ export default function UsersPage() {
     },
     {
       key: "username",
-      header: "Nome",
+      header: t("users.username"),
       render: (value: string) => value || "-",
     },
     {

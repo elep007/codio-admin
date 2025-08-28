@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { MetricCard } from "@/components/ui/metric-card";
 import { Target, Users, Key, TrendingUp, Link, Building } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 
 export default function DashboardPage() {
+  const { t } = useTranslation();
   const { data: metrics = {}, isLoading } = useQuery({
     queryKey: ["/api/dashboard/metrics"],
   });
@@ -29,36 +31,36 @@ export default function DashboardPage() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <MetricCard
-          title="Targets Capturados"
+          title={t("dashboard.targetsCapture")}
           value={(metrics as any)?.totalTargets || 0}
-          change="+12% este mês"
+          change={t("dashboard.thisMonth")}
           changeType="positive"
           icon={Target}
           iconColor="text-red-500"
         />
         
         <MetricCard
-          title="Visitantes Únicos"
+          title={t("dashboard.uniqueVisitors")}
           value={(metrics as any)?.uniqueVisitors || 0}
-          change="Últimas 24h"
+          change={t("dashboard.last24h")}
           changeType="neutral"
           icon={Users}
           iconColor="text-blue-500"
         />
         
         <MetricCard
-          title="Licenças Ativas"
+          title={t("dashboard.activeLicenses")}
           value={(metrics as any)?.activeLicenses || 0}
-          change="0 Checkers"
+          change={t("dashboard.checkers")}
           changeType="neutral"
           icon={Key}
           iconColor="text-purple-500"
         />
         
         <MetricCard
-          title="Taxa de Conversão"
+          title={t("dashboard.conversionRate")}
           value={`${(metrics as any)?.conversionRate || 0}%`}
-          change="↗ Performance"
+          change={t("dashboard.performance")}
           changeType="positive"
           icon={TrendingUp}
           iconColor="text-green-500"
@@ -72,7 +74,7 @@ export default function DashboardPage() {
             <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
               <Link className="w-4 h-4 text-blue-500" />
             </div>
-            <h3 className="text-lg font-semibold text-foreground">Link da Página Ativa</h3>
+            <h3 className="text-lg font-semibold text-foreground">{t("dashboard.activePage")}</h3>
           </div>
           
           <div className="space-y-4">
@@ -116,11 +118,11 @@ export default function DashboardPage() {
             <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
               <Building className="w-4 h-4 text-green-500" />
             </div>
-            <h3 className="text-lg font-semibold text-foreground">Bancos Disponíveis</h3>
+            <h3 className="text-lg font-semibold text-foreground">{t("dashboard.availableBanks")}</h3>
           </div>
           
           <div className="text-center py-8">
-            <p className="text-sm text-muted-foreground mb-2">Total de Bancos:</p>
+            <p className="text-sm text-muted-foreground mb-2">{t("dashboard.totalBanks")}</p>
             <p className="text-3xl font-bold text-foreground" data-testid="text-total-banks">
               {(metrics as any)?.totalBanks || 0}
             </p>
