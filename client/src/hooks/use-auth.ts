@@ -1,29 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "@/store/store";
+import { loginSuccess, logout as logoutAction, setLoading, verifySuccess } from "@/store/authSlice";
 import { authService } from "@/lib/auth";
 
 export function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [admin, setAdmin] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  const { isAuthenticated, admin, isLoading } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     const token = authService.getToken();
     const adminData = authService.getAdmin();
     
     if (token && adminData) {
-      setIsAuthenticated(true);
-      setAdmin(adminData);
+      dispatch(verifySuccess(adminData));
+    } else {
+      dispatch(setLoading(false));
     }
-    
-    setLoading(false);
-  }, []);
+  }, [dispatch]);
 
   const login = async (credentials: any) => {
     try {
       const response = await authService.login(credentials);
       authService.setAuth(response.token, response.admin);
-      setIsAuthenticated(true);
-      setAdmin(response.admin);
+      dispatch(loginSuccess({ token: response.token, admin: response.admin }));
       return response;
     } catch (error) {
       throw error;
@@ -32,14 +31,13 @@ export function useAuth() {
 
   const logout = () => {
     authService.logout();
-    setIsAuthenticated(false);
-    setAdmin(null);
+    dispatch(logoutAction());
   };
 
   return {
     isAuthenticated,
     admin,
-    loading,
+    loading: isLoading,
     login,
     logout,
   };

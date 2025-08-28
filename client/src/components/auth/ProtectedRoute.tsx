@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { useAppSelector } from "@/store/store";
 
@@ -9,8 +10,13 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   const [, setLocation] = useLocation();
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setLocation("/login");
+    }
+  }, [isAuthenticated, setLocation]);
+
   if (!isAuthenticated) {
-    setLocation("/login");
     return null;
   }
 

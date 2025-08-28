@@ -68,8 +68,6 @@ function ProtectedLayout({ children, title, description }: { children: React.Rea
 }
 
 function Router() {
-  const { isAuthenticated } = useAuth();
-
   return (
     <Switch>
       <Route path="/login" component={LoginPage} />
@@ -83,13 +81,9 @@ function Router() {
       ))}
 
       <Route path="/">
-        {isAuthenticated ? (
-          <ProtectedLayout title="Dashboard" description="Gerencie suas campanhas de phishing com controle total">
-            <DashboardPage />
-          </ProtectedLayout>
-        ) : (
-          <LoginPage />
-        )}
+        <ProtectedLayout title="Dashboard" description="Gerencie suas campanhas de phishing com controle total">
+          <DashboardPage />
+        </ProtectedLayout>
       </Route>
 
       <Route component={NotFound} />
