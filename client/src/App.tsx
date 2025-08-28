@@ -56,9 +56,9 @@ const pageConfig = {
 function ProtectedLayout({ children, title, description }: { children: React.ReactNode; title: string; description: string }) {
   return (
     <ProtectedRoute>
-      <div className="flex min-h-screen gradient-bg">
+      <div className="min-h-screen gradient-bg">
         <Sidebar />
-        <div className="flex-1 overflow-auto">
+        <div className="ml-64 flex-1 overflow-auto">
           <Header title={title} description={description} />
           <main className="p-6">{children}</main>
         </div>
