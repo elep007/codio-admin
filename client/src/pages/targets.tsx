@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { MetricCard } from "@/components/ui/metric-card";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
 import { Crosshair, Smartphone, Monitor, TrendingUp, Download, Filter, RefreshCw } from "lucide-react";
 
 export default function TargetsPage() {
+  const { t } = useTranslation();
   const { data: targets = [], isLoading } = useQuery({
     queryKey: ["/api/targets"],
   });
@@ -19,7 +21,7 @@ export default function TargetsPage() {
   const columns = [
     {
       key: "createdAt",
-      header: "Data",
+      header: t("common.date"),
       render: (value: string) => {
         if (!value) return "-";
         return new Date(value).toLocaleDateString("pt-BR");
@@ -27,17 +29,17 @@ export default function TargetsPage() {
     },
     {
       key: "name",
-      header: "Nome",
+      header: t("common.name"),
       render: (value: string) => value || "-",
     },
     {
       key: "cpf",
-      header: "CPF",
+      header: t("targets.cpf"),
       render: (value: string) => value || "-",
     },
     {
       key: "bankId",
-      header: "Banco",
+      header: t("targets.bank"),
       render: (value: string) => {
         if (!value) return "-";
         return (
@@ -49,7 +51,7 @@ export default function TargetsPage() {
     },
     {
       key: "bankDetails",
-      header: "Detalhes Bancários",
+      header: t("targets.bankDetails"),
       render: (value: string) => value || "-",
     },
     {

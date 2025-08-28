@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import type { Verification } from "@shared/schema";
 
 export default function VerificationPage() {
+  const { t } = useTranslation();
   const { data: verificationsData = [], isLoading } = useQuery({
     queryKey: ["/api/verifications"],
   });
@@ -23,15 +25,15 @@ export default function VerificationPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/verifications"] });
       toast({
-        title: "Status atualizado",
-        description: "O status da verificação foi atualizado com sucesso",
+        title: t("verification.statusUpdated"),
+        description: t("verification.statusUpdatedSuccess"),
       });
     },
     onError: () => {
       toast({
         variant: "destructive",
-        title: "Erro",
-        description: "Não foi possível atualizar o status",
+        title: t("common.error"),
+        description: t("verification.updateError"),
       });
     },
   });
@@ -47,7 +49,7 @@ export default function VerificationPage() {
   const columns = [
     {
       key: "createdAt",
-      header: "Data/Hora",
+      header: t("common.date"),
       render: (value: string) => {
         if (!value) return "-";
         return new Date(value).toLocaleString("pt-BR");
@@ -55,12 +57,12 @@ export default function VerificationPage() {
     },
     {
       key: "name",
-      header: "Nome",
+      header: t("common.name"),
       render: (value: string) => value || "-",
     },
     {
       key: "photo",
-      header: "Foto",
+      header: t("verification.photo"),
       render: (value: string) => (
         <div className="w-12 h-12 bg-accent rounded-lg overflow-hidden">
           {value ? (

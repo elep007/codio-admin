@@ -28,6 +28,7 @@ const resources = {
       "common.phone": "Phone",
       "common.date": "Date",
       "common.error": "Error",
+      "common.actions": "Actions",
 
       // Auth
       "auth.title": "JOKERLAB",
@@ -83,6 +84,25 @@ const resources = {
       "users.userDeleted": "User deleted",
       "users.userDeletedSuccess": "User deleted successfully",
       "users.deleteError": "Could not delete user",
+
+      // Targets
+      "targets.cpf": "CPF",
+      "targets.bank": "Bank",
+      "targets.bankDetails": "Bank Details",
+
+      // Banks
+      "banks.bankName": "Bank Name",
+      "banks.accessPassword": "Access Password",
+      "banks.paymentPassword": "Payment Password",
+      "banks.bankDeleted": "Bank deleted",
+      "banks.bankDeletedSuccess": "Bank deleted successfully",
+      "banks.deleteError": "Could not delete bank",
+
+      // Verification
+      "verification.photo": "Photo",
+      "verification.statusUpdated": "Status updated",
+      "verification.statusUpdatedSuccess": "Verification status updated successfully",
+      "verification.updateError": "Could not update status",
 
       // User Profile
       "userProfile.title": "User Profile",
@@ -164,6 +184,7 @@ const resources = {
       "common.phone": "Telefone",
       "common.date": "Data",
       "common.error": "Erro",
+      "common.actions": "Ações",
 
       // Auth
       "auth.title": "JOKERLAB",
@@ -219,6 +240,25 @@ const resources = {
       "users.userDeleted": "Usuário excluído",
       "users.userDeletedSuccess": "O usuário foi excluído com sucesso",
       "users.deleteError": "Não foi possível excluir o usuário",
+
+      // Targets
+      "targets.cpf": "CPF",
+      "targets.bank": "Banco",
+      "targets.bankDetails": "Detalhes Bancários",
+
+      // Banks
+      "banks.bankName": "Nome do Banco",
+      "banks.accessPassword": "Senha de Acesso",
+      "banks.paymentPassword": "Senha de Pagamento",
+      "banks.bankDeleted": "Banco excluído",
+      "banks.bankDeletedSuccess": "O banco foi excluído com sucesso",
+      "banks.deleteError": "Não foi possível excluir o banco",
+
+      // Verification
+      "verification.photo": "Foto",
+      "verification.statusUpdated": "Status atualizado",
+      "verification.statusUpdatedSuccess": "O status da verificação foi atualizado com sucesso",
+      "verification.updateError": "Não foi possível atualizar o status",
 
       // User Profile
       "userProfile.title": "Perfil do Usuário",

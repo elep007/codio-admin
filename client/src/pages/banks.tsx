@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
 import { Building, Plus, Edit, Trash2, Eye, EyeOff } from "lucide-react";
@@ -8,6 +9,7 @@ import { apiRequest } from "@/lib/queryClient";
 import type { Bank } from "@shared/schema";
 
 export default function BanksPage() {
+  const { t } = useTranslation();
   const { data: banksData = [], isLoading } = useQuery({
     queryKey: ["/api/banks"],
   });
@@ -23,15 +25,15 @@ export default function BanksPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/banks"] });
       toast({
-        title: "Banco excluído",
-        description: "O banco foi excluído com sucesso",
+        title: t("banks.bankDeleted"),
+        description: t("banks.bankDeletedSuccess"),
       });
     },
     onError: () => {
       toast({
         variant: "destructive",
-        title: "Erro",
-        description: "Não foi possível excluir o banco",
+        title: t("common.error"),
+        description: t("banks.deleteError"),
       });
     },
   });
@@ -47,7 +49,7 @@ export default function BanksPage() {
   const columns = [
     {
       key: "name",
-      header: "Nome do Banco",
+      header: t("banks.bankName"),
       render: (value: string, bank: Bank) => (
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-green-500 rounded flex items-center justify-center">
@@ -59,7 +61,7 @@ export default function BanksPage() {
     },
     {
       key: "accessPassword",
-      header: "Senha de Acesso",
+      header: t("banks.accessPassword"),
       render: (value: string, bank: Bank) => {
         const isVisible = visiblePasswords[`${bank.id}-access`];
         return (
@@ -82,7 +84,7 @@ export default function BanksPage() {
     },
     {
       key: "paymentPassword",
-      header: "Senha de Pagamento",
+      header: t("banks.paymentPassword"),
       render: (value: string, bank: Bank) => {
         const isVisible = visiblePasswords[`${bank.id}-payment`];
         return (
@@ -105,7 +107,7 @@ export default function BanksPage() {
     },
     {
       key: "actions",
-      header: "Ações",
+      header: t("common.actions"),
       render: (_: any, bank: Bank) => (
         <div className="flex gap-2">
           <Button
