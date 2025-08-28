@@ -6,6 +6,7 @@ import { store } from "./store/store";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "./hooks/use-auth";
+import "./lib/i18n";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Sidebar from "./components/layout/Sidebar";
 import Header from "./components/layout/Header";
@@ -23,43 +24,43 @@ import NotFound from "./pages/not-found";
 const pageConfig = {
   "/dashboard": {
     component: DashboardPage,
-    title: "Dashboard",
-    description: "Gerencie suas campanhas de phishing com controle total",
+    titleKey: "dashboard.title",
+    descriptionKey: "dashboard.description",
   },
   "/users": {
     component: UsersPage,
-    title: "Gerenciamento de Usuários",
-    description: "Visualize e gerencie todos os usuários do sistema",
+    titleKey: "users.title",
+    descriptionKey: "users.description",
   },
   "/user-profile": {
     component: UserProfilePage,
-    title: "Perfil do Usuário",
-    description: "Gerencie suas informações pessoais com controle total e segurança avançada",
+    titleKey: "userProfile.title",
+    descriptionKey: "userProfile.description",
   },
   "/targets": {
     component: TargetsPage,
-    title: "Central de Targets",
-    description: "Gerencie e monitore seus targets com máxima eficiência",
+    titleKey: "targets.title",
+    descriptionKey: "targets.description",
   },
   "/banks": {
     component: BanksPage,
-    title: "Informações Bancárias",
-    description: "Gerencie as credenciais bancárias com segurança",
+    titleKey: "banks.title",
+    descriptionKey: "banks.description",
   },
   "/verification": {
     component: VerificationPage,
-    title: "Sistema de Verificação",
-    description: "Aprove ou rejeite verificações de usuários",
+    titleKey: "verification.title",
+    descriptionKey: "verification.description",
   },
 };
 
-function ProtectedLayout({ children, title, description }: { children: React.ReactNode; title: string; description: string }) {
+function ProtectedLayout({ children, titleKey, descriptionKey }: { children: React.ReactNode; titleKey: string; descriptionKey: string }) {
   return (
     <ProtectedRoute>
       <div className="min-h-screen gradient-bg">
         <Sidebar />
         <div className="ml-64 flex-1 overflow-auto">
-          <Header title={title} description={description} />
+          <Header titleKey={titleKey} descriptionKey={descriptionKey} />
           <main className="p-6">{children}</main>
         </div>
       </div>
@@ -74,14 +75,14 @@ function Router() {
       
       {Object.entries(pageConfig).map(([path, config]) => (
         <Route key={path} path={path}>
-          <ProtectedLayout title={config.title} description={config.description}>
+          <ProtectedLayout titleKey={config.titleKey} descriptionKey={config.descriptionKey}>
             <config.component />
           </ProtectedLayout>
         </Route>
       ))}
 
       <Route path="/">
-        <ProtectedLayout title="Dashboard" description="Gerencie suas campanhas de phishing com controle total">
+        <ProtectedLayout titleKey="dashboard.title" descriptionKey="dashboard.description">
           <DashboardPage />
         </ProtectedLayout>
       </Route>

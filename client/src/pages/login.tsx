@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
 import { loginSchema, type LoginRequest } from "@shared/schema";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
@@ -12,6 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 
 export default function LoginPage() {
   const [, setLocation] = useLocation();
+  const { t } = useTranslation();
   const { login } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -29,15 +31,15 @@ export default function LoginPage() {
     try {
       await login(data);
       toast({
-        title: "Login realizado com sucesso",
-        description: "Bem-vindo ao painel administrativo",
+        title: t("auth.loginSuccess"),
+        description: t("auth.loginSuccessDesc"),
       });
       setLocation("/dashboard");
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Erro no login",
-        description: error.message || "Credenciais inválidas",
+        title: t("auth.loginError"),
+        description: error.message || t("auth.invalidCredentials"),
       });
     } finally {
       setIsLoading(false);
@@ -52,8 +54,8 @@ export default function LoginPage() {
             <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl font-bold text-primary-foreground">J</span>
             </div>
-            <h1 className="text-2xl font-bold text-foreground">JOKERLAB</h1>
-            <p className="text-muted-foreground mt-2">Painel Administrativo</p>
+            <h1 className="text-2xl font-bold text-foreground">{t("auth.title")}</h1>
+            <p className="text-muted-foreground mt-2">{t("auth.subtitle")}</p>
           </div>
 
           <Form {...form}>
@@ -63,11 +65,11 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-foreground">Email</FormLabel>
+                    <FormLabel className="text-foreground">{t("common.email")}</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="admin@jokerlab.app"
+                        placeholder={t("auth.loginPlaceholder")}
                         className="bg-input border-border text-foreground placeholder-muted-foreground"
                         data-testid="input-email"
                         {...field}
@@ -83,11 +85,11 @@ export default function LoginPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-foreground">Senha</FormLabel>
+                    <FormLabel className="text-foreground">{t("common.password")}</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="••••••••"
+                        placeholder={t("auth.passwordPlaceholder")}
                         className="bg-input border-border text-foreground placeholder-muted-foreground"
                         data-testid="input-password"
                         {...field}
@@ -104,7 +106,7 @@ export default function LoginPage() {
                 disabled={isLoading}
                 data-testid="button-login"
               >
-                {isLoading ? "Entrando..." : "Entrar"}
+                {isLoading ? t("auth.loggingIn") : t("auth.loginButton")}
               </Button>
             </form>
           </Form>

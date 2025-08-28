@@ -1,4 +1,5 @@
 import { Link, useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/store/store";
 import { logout } from "@/store/authSlice";
 import {
@@ -13,31 +14,31 @@ import {
 const menuItems = [
   {
     id: "dashboard",
-    label: "Dashboard",
+    labelKey: "sidebar.dashboard",
     icon: ChartLine,
     path: "/dashboard",
   },
   {
     id: "users",
-    label: "Usuários",
+    labelKey: "sidebar.users",
     icon: Users,
     path: "/users",
   },
   {
     id: "targets",
-    label: "Central de Targets",
+    labelKey: "sidebar.targets",
     icon: Crosshair,
     path: "/targets",
   },
   {
     id: "banks",
-    label: "Bancos",
+    labelKey: "sidebar.banks",
     icon: Building2,
     path: "/banks",
   },
   {
     id: "verification",
-    label: "Verificação",
+    labelKey: "sidebar.verification",
     icon: ShieldCheck,
     path: "/verification",
   },
@@ -45,6 +46,7 @@ const menuItems = [
 
 export default function Sidebar() {
   const [location] = useLocation();
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -59,15 +61,15 @@ export default function Sidebar() {
             <span className="text-lg font-bold text-primary-foreground">J</span>
           </div>
           <div>
-            <h2 className="font-bold text-foreground">JOKERLAB</h2>
-            <p className="text-xs text-muted-foreground">Ultimate Panel</p>
+            <h2 className="font-bold text-foreground">{t("auth.title")}</h2>
+            <p className="text-xs text-muted-foreground">{t("sidebar.ultimatePanel")}</p>
           </div>
         </div>
       </div>
 
       <nav className="px-4 space-y-2">
         <p className="text-xs text-muted-foreground uppercase tracking-wider px-3 py-2">
-          MENU PRINCIPAL
+          {t("sidebar.mainMenu")}
         </p>
 
         {menuItems.map((item) => {
@@ -86,7 +88,7 @@ export default function Sidebar() {
               data-testid={`nav-${item.id}`}
             >
               <Icon className="w-5 h-5" />
-              <span>{item.label}</span>
+              <span>{t(item.labelKey)}</span>
             </Link>
           );
         })}
@@ -99,7 +101,7 @@ export default function Sidebar() {
           data-testid="button-logout"
         >
           <LogOut className="w-5 h-5" />
-          <span>Logout</span>
+          <span>{t("common.logout")}</span>
         </button>
       </div>
     </div>
